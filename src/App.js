@@ -5,8 +5,10 @@ import './App.css';
 function App() {
   // menyimpan data dari db.json
   const [data, setData] = useState([])
-  // pointer untuk edit data
+  // pointer untuk edit card
   const [edit, setEdit] = useState(null)
+  // pointer untuk tambah item pada card
+  const [add, setAdd] = useState(null)
 
   // untuk mendapatkan data
   function getData() {
@@ -28,7 +30,7 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault()
     const value = e.target.submit.value
-    console.log(value)
+    // console.log(value)
     if (value !== '')
       axios.post('http://localhost:3001/trello', { name: value })
         .then(() => {
@@ -52,47 +54,68 @@ function App() {
       .then(() => { getData(); setEdit(null) })
   }
 
+  // menambah item dalam card
+  function handleAdd(e) {
+    e.preventDefault()
+    setAdd(null)
+  }
+
   return (
     // body
     <div className='p-5 grid grid-rows-1 gap-2'>
 
       {/* header */}
-      <div className=''>
+      <div className='text-center text-xl bg-blue-100 py-5'>
         Trello
       </div>
 
-      {/* submit */}
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input className='p-2' name='submit' />
-          <button className='p-2' type='submit'>submit</button>
-        </form>
-      </div>
-
       {/* cards container */}
-      <div className='grid grid-cols-3 bg-blue-100 gap-2 p-2'>
+      <div className='grid grid-cols-3 bg-blue-100 gap-2 p-4'>
+
         {/* card */}
         {
           data.map((value, index) => {
             return (
-              edit !== index ?
-                <div key={index} className='bg-red-100 p-2'>
-                  <div>{value.name}</div>
-                  <button className='p-2 bg-green-100 mx-1' onClick={() => setEdit(index)} >e</button>
-                  <button className='p-2 bg-red-200 mx-1' onClick={() => handleDelete(value.id)}>x</button>
-                  <button className='p-2 bg-blue-200 mx-1'>+</button>
-                </div>
-                :
-                <form key={index} onSubmit={handleEdit}>
-                  <input name='save' defaultValue={value.name} />
-                  <button className='p-2 bg-blue-200 mx-1' >save</button>
-                </form>
+              <div key={index} className='bg-red-100 p-2'>
+                {edit !== index ?
+                  <div>
+                    <div className='m-1'>{value.name}</div>
+                    <button className='p-2 bg-green-100 m-1' onClick={() => setEdit(index)} >e</button>
+                    <button className='p-2 bg-red-200 m-1' onClick={() => handleDelete(value.id)}>x</button>
+                    {
+                      add !== index ?
+                        <button className='p-2 bg-blue-200 m-1 w-full' onClick={() => setAdd(index)}>+</button>
+                        :
+                        <form onSubmit={handleAdd}>
+                          <input className='p-2 m-1' name='add'  />
+                          <button className='p-2 bg-blue-200 m-1' >save</button>
+                        </form>
+                    }
+                    <div className='p-2 bg-white mx-1 w-full'>makan</div>
+                  </div>
+                  :
+                  <form onSubmit={handleEdit}>
+                    <input className='p-2 m-1' name='save' defaultValue={value.name}/>
+                    <button className='p-2 bg-blue-200 m-1' >save</button>
+                  </form>}
+              </div>
             )
           })
         }
+
+        {/* submit */}
+        {
+
+        }
+        <div className='bg-red-200 p-2' >
+          <form onSubmit={handleSubmit}>
+            <input className='p-2 m-1' name='submit' />
+            <button className='p-2 bg-blue-200 m-1' type='submit'>submit</button>
+            <button className='p-2 bg-red-300 m-1' >x</button>
+          </form>
+        </div>
       </div>
     </div>
-
   );
 }
 
