@@ -103,8 +103,8 @@ function App() {
               }
               <div className='p-2 bg-white m-1 w-full'>
                 <div>programming</div>
-                <button className='p-2 bg-green-100 m-1' onClick={() => setEdit(index)} >e</button>
-                <button className='p-2 bg-red-200 m-1' onClick={() => handleDelete(value.id)}>x</button>
+                <button className='p-2 bg-green-100 m-1' onClick={() => {}} >e</button>
+                <button className='p-2 bg-red-200 m-1' onClick={() => {}}>x</button>
 
               </div>
             </div>
