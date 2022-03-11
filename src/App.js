@@ -9,7 +9,7 @@ function App() {
   const [edit, setEdit] = useState(null)
   // pointer untuk tambah item pada card
   const [add, setAdd] = useState(null)
-  // menutup submit
+  // buka tutup submit
   const [submit, setSubmit] = useState(false)
 
   // untuk mendapatkan data
@@ -19,7 +19,7 @@ function App() {
     console.log(data)
   }
 
-  // yang dilakukan setiap ada perubahan
+  // dilakukan setiap ada perubahan
   useEffect(() => {
     getData()
 
@@ -28,7 +28,7 @@ function App() {
     }
   }, [])
 
-  // submit data
+  // submit data 
   function handleSubmit(e) {
     e.preventDefault()
     const value = e.target.submit.value
@@ -47,7 +47,7 @@ function App() {
       .then(() => getData())
   }
 
-  // menyimpan data yang telah diedit
+  // menyimpan card yang telah diedit
   function handleEdit(e) {
     e.preventDefault()
     const value = e.target.save.value
@@ -57,10 +57,11 @@ function App() {
         .then(() => { getData(); setEdit(null) })
   }
 
-  // menambah item dalam card
+  // menambah item dalam card, tapi belum jadi :)
   function handleAdd(e) {
     e.preventDefault()
-    setAdd(null)
+    const value = e.target.add.value
+    if (value !== '') setAdd(null)
   }
 
   return (
@@ -76,40 +77,39 @@ function App() {
       <div className='grid grid-cols-3 bg-blue-100 gap-2 p-4'>
 
         {/* card */}
-        {
-          data.map((value, index) => {
-            return (
-              <div key={index} className='bg-red-100 p-2'>
-                {edit !== index ?
-                  <div>
-                    <div className='m-1'>{value.name}</div>
-                    <button className='p-2 bg-green-100 m-1' onClick={() => setEdit(index)} >e</button>
-                    <button className='p-2 bg-red-200 m-1' onClick={() => handleDelete(value.id)}>x</button>
-                  </div>
-                  :
-                  <form onSubmit={handleEdit}>
-                    <input className='p-2 m-1' name='save' defaultValue={value.name} />
-                    <button className='p-2 bg-blue-200 m-1' >save</button>
-                  </form>}
-
-                {/* tambah data, tapi belum jadi :) */}
-                {add !== index ?
-                  <button className='p-2 bg-blue-200 m-1 w-full' onClick={() => setAdd(index)}>+</button>
-                  :
-                  <form onSubmit={handleAdd}>
-                    <input className='p-2 m-1' name='add' />
-                    <button className='p-2 bg-blue-200 m-1' >add</button>
-                  </form>
-                }
-                <div className='p-2 bg-white m-1 w-full'>
-                  <div>mendapatkan</div>
+        {data.map((value, index) => {
+          return (
+            <div key={index} className='bg-red-100 p-2'>
+              {edit !== index ?
+                <div>
+                  <div className='m-1'>{value.name}</div>
                   <button className='p-2 bg-green-100 m-1' onClick={() => setEdit(index)} >e</button>
                   <button className='p-2 bg-red-200 m-1' onClick={() => handleDelete(value.id)}>x</button>
-
                 </div>
+                :
+                <form onSubmit={handleEdit}>
+                  <input className='p-2 m-1' name='save' defaultValue={value.name} />
+                  <button className='p-2 bg-blue-200 m-1' >save</button>
+                </form>}
+
+              {/* tambah data, tapi belum jadi :) */}
+              {add !== index ?
+                <button className='p-2 bg-blue-200 m-1 w-full' onClick={() => setAdd(index)}>+</button>
+                :
+                <form onSubmit={handleAdd}>
+                  <input className='p-2 m-1' name='add' />
+                  <button className='p-2 bg-blue-200 m-1' >add</button>
+                </form>
+              }
+              <div className='p-2 bg-white m-1 w-full'>
+                <div>programming</div>
+                <button className='p-2 bg-green-100 m-1' onClick={() => setEdit(index)} >e</button>
+                <button className='p-2 bg-red-200 m-1' onClick={() => handleDelete(value.id)}>x</button>
+
               </div>
-            )
-          })
+            </div>
+          )
+        })
         }
 
         {/* submit */}
@@ -122,11 +122,10 @@ function App() {
             </form>
             :
             <div>
-              <button className='w-full' onClick={() => setSubmit(true)}>Tambah</button>
+              <button className='w-full bg-blue-300 p-2' onClick={() => setSubmit(true)}>Tambah kartu</button>
             </div>
           }
         </div>
-
       </div>
     </div>
   );

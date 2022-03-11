@@ -1,28 +1,20 @@
 {
   "trello": [
     {
+      "name": "tidak",
+      "id": 24
+    },
+    {
+      "name": "doing",
+      "id": 25
+    },
+    {
+      "name": "done",
+      "id": 26
+    },
+    {
       "name": "satu",
-      "id": 18
-    },
-    {
-      "name": "enam",
-      "id": 19
-    },
-    {
-      "name": "tujuh",
-      "id": 20
-    },
-    {
-      "name": "tiga",
-      "id": 21
-    },
-    {
-      "name": "empat",
-      "id": 22
-    },
-    {
-      "name": "lima",
-      "id": 23
+      "id": 27
     }
   ]
 }
