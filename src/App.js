@@ -9,6 +9,8 @@ function App() {
   const [edit, setEdit] = useState(null)
   // pointer untuk tambah item pada card
   const [add, setAdd] = useState(null)
+  // menutup submit
+  const [submit, setSubmit] = useState(false)
 
   // untuk mendapatkan data
   function getData() {
@@ -50,8 +52,9 @@ function App() {
     e.preventDefault()
     const value = e.target.save.value
     // console.log(value)
-    axios.patch(`http://localhost:3001/trello/${data[edit].id}`, { name: value })
-      .then(() => { getData(); setEdit(null) })
+    if (value !== '')
+      axios.patch(`http://localhost:3001/trello/${data[edit].id}`, { name: value })
+        .then(() => { getData(); setEdit(null) })
   }
 
   // menambah item dalam card
@@ -82,38 +85,48 @@ function App() {
                     <div className='m-1'>{value.name}</div>
                     <button className='p-2 bg-green-100 m-1' onClick={() => setEdit(index)} >e</button>
                     <button className='p-2 bg-red-200 m-1' onClick={() => handleDelete(value.id)}>x</button>
-                    {
-                      add !== index ?
-                        <button className='p-2 bg-blue-200 m-1 w-full' onClick={() => setAdd(index)}>+</button>
-                        :
-                        <form onSubmit={handleAdd}>
-                          <input className='p-2 m-1' name='add'  />
-                          <button className='p-2 bg-blue-200 m-1' >save</button>
-                        </form>
-                    }
-                    <div className='p-2 bg-white mx-1 w-full'>makan</div>
                   </div>
                   :
                   <form onSubmit={handleEdit}>
-                    <input className='p-2 m-1' name='save' defaultValue={value.name}/>
+                    <input className='p-2 m-1' name='save' defaultValue={value.name} />
                     <button className='p-2 bg-blue-200 m-1' >save</button>
                   </form>}
+
+                {/* tambah data, tapi belum jadi :) */}
+                {add !== index ?
+                  <button className='p-2 bg-blue-200 m-1 w-full' onClick={() => setAdd(index)}>+</button>
+                  :
+                  <form onSubmit={handleAdd}>
+                    <input className='p-2 m-1' name='add' />
+                    <button className='p-2 bg-blue-200 m-1' >add</button>
+                  </form>
+                }
+                <div className='p-2 bg-white m-1 w-full'>
+                  <div>mendapatkan</div>
+                  <button className='p-2 bg-green-100 m-1' onClick={() => setEdit(index)} >e</button>
+                  <button className='p-2 bg-red-200 m-1' onClick={() => handleDelete(value.id)}>x</button>
+
+                </div>
               </div>
             )
           })
         }
 
         {/* submit */}
-        {
-
-        }
         <div className='bg-red-200 p-2' >
-          <form onSubmit={handleSubmit}>
-            <input className='p-2 m-1' name='submit' />
-            <button className='p-2 bg-blue-200 m-1' type='submit'>submit</button>
-            <button className='p-2 bg-red-300 m-1' >x</button>
-          </form>
+          {submit ?
+            <form onSubmit={handleSubmit}>
+              <input className='p-2 m-1' name='submit' />
+              <button className='p-2 bg-blue-200 m-1' type='submit'>submit</button>
+              <button className='p-2 bg-red-300 m-1' onClick={() => setSubmit(false)}>x</button>
+            </form>
+            :
+            <div>
+              <button className='w-full' onClick={() => setSubmit(true)}>Tambah</button>
+            </div>
+          }
         </div>
+
       </div>
     </div>
   );

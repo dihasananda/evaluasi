@@ -1,36 +1,28 @@
 {
   "trello": [
     {
-      "name": "enam",
-      "id": 12
-    },
-    {
-      "name": "enam",
-      "id": 13
-    },
-    {
-      "name": "dua",
-      "id": 14
-    },
-    {
-      "name": "empat",
-      "id": 15
-    },
-    {
-      "name": "lima",
-      "id": 16
-    },
-    {
-      "name": "sepuluh",
-      "id": 17
-    },
-    {
-      "name": "lima",
+      "name": "satu",
       "id": 18
     },
     {
       "name": "enam",
       "id": 19
+    },
+    {
+      "name": "tujuh",
+      "id": 20
+    },
+    {
+      "name": "tiga",
+      "id": 21
+    },
+    {
+      "name": "empat",
+      "id": 22
+    },
+    {
+      "name": "lima",
+      "id": 23
     }
   ]
 }
