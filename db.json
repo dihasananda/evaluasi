@@ -1,28 +1,20 @@
 {
   "trello": [
     {
-      "name": "mobil",
-      "id": 1
+      "name": "motor",
+      "id": 8
     },
     {
-      "name": "motor",
-      "id": 2
+      "name": "tiga",
+      "id": 9
     },
     {
-      "name": "motor",
-      "id": 3
+      "name": "tiga empat",
+      "id": 10
     },
     {
-      "name": "motor",
-      "id": 4
-    },
-    {
-      "name": "motor",
-      "id": 5
-    },
-    {
-      "name": "motor",
-      "id": 6
+      "name": "tiga empat",
+      "id": 11
     }
   ]
 }
